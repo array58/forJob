@@ -3,28 +3,40 @@
 const app = getApp()
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    password:""
   },
- 
-  onLoad: function (res) {
-    console.log(app.data.initialpass);
-    app.setpassword("this is new word");
-    if(res.id==undefined){
-      res.id="undefined"
-    }
-    wx.showModal({
-      title: '查看参数',
-      content: res.id,
+  setLoginPass(e){
+    this.setData({
+      password:e.detail.value
     })
+  },
+  login(){
+    if (app.data.initialpass == this.data.password || app.data.unipassword == this.data.password ){
+      if (this.data.password.trim().length!=0){
+        wx.showModal({
+          title: '恭喜',
+          content: '登录成功',
+        })
+      }
+    }else{
+      wx.showModal({
+        title: '抱歉',
+        content: '登录失败',
+      })
+      app.data.nextFrom=this.data.password;
+    }
+  },
+  onLoad: function (res) {
+    this.setData({
+      password:app.data.initialpass
+    })
+ 
   },
   onShareAppMessage:function(res){
     console.log(res)
     return {
       withShareTicket: true,
-      path:"pages/index/index?id=123"
+      path:"pages/index/index?from="+app.data.nextFrom
     }
   }
 })

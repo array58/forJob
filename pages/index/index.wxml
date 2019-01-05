@@ -1,4 +1,7 @@
 <!--index.wxml-->
 <view>
 
+<input class='test' id='test' bindinput='setLoginPass' value='{{password}}'></input>
+<button type='confirm' style='width:100px;' bindtap='login'>登录</button>
+
 </view>

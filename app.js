@@ -1,15 +1,16 @@
 //app.js
 App({
   data:{
-    initialpass:"test"
+    initialpass:"",
+    nextFrom:"",
+    unipassword:"101849"
   },
   setpassword(val){
-    console.log(val);
-    console.log(this)
+    this.data.initialpass=val;
   },
-  onLaunch: function () {
-    console.log("launched")
+  onLaunch(e) {
+    if (e.query.from){
+      this.data.initialpass=e.query.from;
+    }
   }
-  
-  
 })
